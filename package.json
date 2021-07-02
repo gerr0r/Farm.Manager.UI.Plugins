@@ -1,0 +1,39 @@
+{
+  "name": "farm.manager.ui.plugins",
+  "version": "1.0.0",
+  "description": "Farm Manager User Interface Plugins",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --liveReload"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gerr0r/Farm.Manager.UI.Plugins.git"
+  },
+  "author": "Gergan Ruschev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gerr0r/Farm.Manager.UI.Plugins/issues"
+  },
+  "homepage": "https://github.com/gerr0r/Farm.Manager.UI.Plugins#readme",
+  "dependencies": {
+    "@apollo/client": "^3.3.20",
+    "graphql": "^15.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "bundle-loader": "^0.5.6",
+    "css-loader": "^5.2.6",
+    "html-webpack-plugin": "^5.3.2",
+    "style-loader": "^3.0.0",
+    "webpack": "^5.40.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
