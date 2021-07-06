@@ -1,4 +1,6 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
+import AddCountryForm from "./AddCountryForm";
 
 import { COUNTRIES } from "../gql";
 import { useQuery } from "@apollo/client";
@@ -20,14 +22,24 @@ const Countries = () => {
         <tbody>
           {data.getCountries.map((country) => (
             <tr key={country.code}>
-              <td>{country.name}</td>
+              <td>
+                <Link
+                  to={{
+                    pathname: `/countries/${country.code}`,
+                    state: { countryName: country.name },
+                  }}
+                >
+                  {country.name}
+                </Link>
+              </td>
               <td>{country.code}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      <AddCountryForm />
     </div>
   );
 };
 
-export default Countries
+export default Countries;

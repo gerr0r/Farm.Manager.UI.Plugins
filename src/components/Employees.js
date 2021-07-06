@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Table = ({ columnNames, data }) => {
+const Employees = () => {
     return (
         <div>
-            
+            Employees
         </div>
     )
 }
 
-export default Table
+export default Employees

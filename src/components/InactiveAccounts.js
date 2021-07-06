@@ -9,7 +9,7 @@ const InactiveAccounts = () => {
 
   const [activate, { loading: mLoading, data: mData, error: mError }] =
     useMutation(ACTIVATE, {
-      update(cache, { data: { activate: id } }) {
+      update(cache, { data: { activate: {id, email, createdAt} } }) {
         cache.modify({
           fields: {
             inactiveAccounts(oldAccounts, { readField }) {
@@ -17,9 +17,15 @@ const InactiveAccounts = () => {
                 (account) => id !== readField("id", account)
               );
             },
+            activeAccounts(oldAccounts = []) {
+              return [...oldAccounts, {id, email, createdAt}]
+            }
           },
         });
       },
+      onError(error) {
+        console.log(error);
+      }
     });
 
   function activateAccount(id) {
