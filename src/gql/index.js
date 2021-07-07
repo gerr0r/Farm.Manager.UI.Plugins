@@ -124,3 +124,79 @@ export const NEW_COUNTRY = gql`
     }
   }
 `;
+
+export const FARMS = gql`
+query GetFarms {
+  getFarms {
+    id
+    name
+    region {
+      name
+      country {
+        name
+      }
+    }
+  }
+}
+`
+
+export const ACCOUNT_COUNTRIES = gql`
+query GetAccountCountries {
+  accountCountries {
+		country {
+      code
+      name
+    }
+  }
+}
+`
+
+export const ADD_FARM = gql`
+mutation AddFarm($name: String!, $regionId: ID!) {
+  addFarm(name: $name, regionId: $regionId) {
+    id
+    name
+    region {
+      name
+      country {
+        name
+      }
+    }
+  }
+}
+`
+
+export const FARM_FIELDS = gql`
+query GetFarmFields($farmId: ID!) {
+  getFarmFields(farmId: $farmId) {
+    id
+    farmId
+    soilType
+  }
+}
+`
+
+export const EMPLOYEES = gql`
+query GetEmployees {
+  getEmployees {
+    id
+    address
+    name
+    number
+    salary
+    farmId
+  }
+}
+`
+
+export const FARM_EMPLOYEES = gql`
+query GetFarmEmployees($farmId: ID!) {
+  getFarmEmployees(farmId: $farmId) {
+    id
+    address
+    name
+    number
+    salary
+  }
+}
+`
