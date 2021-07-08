@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { INACTIVE_ACCOUNTS, ACTIVATE } from "../gql";
 import { useQuery, useMutation } from "@apollo/client";
 import { getDate } from "../utils/date";
@@ -9,7 +9,14 @@ const InactiveAccounts = () => {
 
   const [activate, { loading: mLoading, data: mData, error: mError }] =
     useMutation(ACTIVATE, {
-      update(cache, { data: { activate: {id, email, createdAt} } }) {
+      update(
+        cache,
+        {
+          data: {
+            activate: { id, email, createdAt },
+          },
+        }
+      ) {
         cache.modify({
           fields: {
             inactiveAccounts(oldAccounts, { readField }) {
@@ -18,14 +25,14 @@ const InactiveAccounts = () => {
               );
             },
             activeAccounts(oldAccounts = []) {
-              return [...oldAccounts, {id, email, createdAt}]
-            }
+              return [...oldAccounts, { id, email, createdAt }];
+            },
           },
         });
       },
       onError(error) {
         console.log(error);
-      }
+      },
     });
 
   function activateAccount(id) {
@@ -51,10 +58,17 @@ const InactiveAccounts = () => {
         <tbody>
           {data.inactiveAccounts.map((account) => (
             <tr key={account.id}>
-              <td><Link to={`/inactive-accounts/${account.id}`}>{account.email}</Link></td>
               <td>
-                {getDate(account.createdAt)}
+              <Link
+                  to={{
+                    pathname: `/inactive-accounts/${account.id}`,
+                    state: { account },
+                  }}
+                >
+                  {account.email}
+                </Link>
               </td>
+              <td>{getDate(account.createdAt)}</td>
               <td>
                 <button onClick={() => activateAccount(account.id)}>
                   Activate

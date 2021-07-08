@@ -1,17 +1,15 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
-import { FARMS } from '../gql'
-import AddFarmForm from './AddFarmForm'
-
+import React from "react";
+import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { FARMS } from "../gql";
+import AddFarmForm from "./AddFarmForm";
 
 const Farms = () => {
-    const {loading, data} = useQuery(FARMS)
+  const { loading, data } = useQuery(FARMS);
 
-
-    if (loading) return null
-    return (
-        <div>
+  if (loading) return null;
+  return (
+    <div>
       <h3>Farms</h3>
       <table className="table">
         <thead>
@@ -33,14 +31,16 @@ const Farms = () => {
                   {farm.name}
                 </Link>
               </td>
-              <td>{farm.region.name}, {farm.region.country.name}</td>
+              <td>
+                {farm.region.name}, {farm.region.country.name}
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
       <AddFarmForm />
-        </div>
-    )
-}
+    </div>
+  );
+};
 
-export default Farms
+export default Farms;

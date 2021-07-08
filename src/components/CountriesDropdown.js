@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import { COUNTRIES, ADD_ASSIGNMENT, NEW_COUNTRY } from "../gql";
+import { COUNTRIES, ADD_ASSIGNMENT } from "../gql";
 
 const CountriesDropdown = ({ accountId }) => {
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -11,16 +11,12 @@ const CountriesDropdown = ({ accountId }) => {
       accountId,
       countryCode: selectedCountry,
     },
-    update(cache, { data: { addAssignment } }) {
+    update(cache, { data: { addAssignment: newCountry } }) {
       cache.modify({
         // TODO FIX: CACHE DOESN'T UPDATE
-        id: cache.identify(`Account:${accountId}`),
         fields: {
-          countries(oldCountries = []) {
-            const newCountry = cache.writeFragment({
-              data: addAssignment,
-              fragment: NEW_COUNTRY,
-            });
+          id: cache.identify(accountId),
+          accountCountries(oldCountries = []) {
             return [...oldCountries, newCountry];
           },
         },

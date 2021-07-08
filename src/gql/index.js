@@ -141,12 +141,32 @@ query GetFarms {
 `
 
 export const ACCOUNT_COUNTRIES = gql`
-query GetAccountCountries {
-  accountCountries {
+query GetAccountCountries($accountId: ID) {
+  accountCountries(accountId: $accountId) {
 		country {
       code
       name
     }
+  }
+}
+`
+
+export const ACCOUNT_USERS = gql`
+query AccountUsers {
+  accountUsers {
+    id
+    createdAt
+    email
+  }
+}
+`
+
+export const ADD_USER = gql`
+mutation AddUser($email: String!, $password: String!) {
+  addUser(email: $email, password: $password) {
+    email
+    createdAt
+    id
   }
 }
 `
@@ -160,6 +180,40 @@ mutation AddFarm($name: String!, $regionId: ID!) {
       name
       country {
         name
+      }
+    }
+  }
+}
+`
+
+export const USER_FARMS = gql`
+query GetUserFarmsAccess($accountId: ID!) {
+  userFarms(accountId: $accountId) {
+		farm {
+      id
+      name
+      region {
+        name
+        country {
+          name
+        }
+      }
+    }
+  }
+}
+`
+
+export const SET_FARM_ACCESS = gql`
+mutation SetFarmAccess($accountId: ID!, $farmId: ID!) {
+  setFarmAccess(accountId: $accountId, farmId: $farmId) {
+    farm {
+      id
+      name
+      region {
+        name
+        country {
+          name
+        }
       }
     }
   }

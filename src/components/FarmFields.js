@@ -3,13 +3,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FARM_FIELDS } from "../gql";
 
-const FarmFields = ({farmId}) => {
+const FarmFields = ({ farmId }) => {
+  const { loading, data } = useQuery(FARM_FIELDS, {
+    variables: { farmId },
+  });
 
-    const {loading, data} = useQuery(FARM_FIELDS, {
-        variables: { farmId }
-    })
-
-    if (loading) return null
+  if (loading) return null;
   return (
     <table className="table">
       <thead>
@@ -26,15 +25,13 @@ const FarmFields = ({farmId}) => {
               <Link
                 to={{
                   pathname: `/fields/${field.id}`,
-                //   state: { farm },
+                  //   state: { farm },
                 }}
               >
                 {index + 1}
               </Link>
             </td>
-            <td>
-              {field.soilType}
-            </td>
+            <td>{field.soilType}</td>
             <td>Crops</td>
           </tr>
         ))}
