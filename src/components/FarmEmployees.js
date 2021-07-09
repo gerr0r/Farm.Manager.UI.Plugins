@@ -28,7 +28,7 @@ const FarmEmployees = ({farmId}) => {
               <Link
                 to={{
                   pathname: `/employees/${employee.id}`,
-                //   state: { farm },
+                  state: { employee },
                 }}
               >
                 {employee.name}

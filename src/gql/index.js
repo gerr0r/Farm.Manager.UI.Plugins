@@ -114,7 +114,7 @@ export const REMOVE_ASSIGNMENT = gql`
       }
     }
   }
-`
+`;
 
 export const NEW_COUNTRY = gql`
   fragment NewCountry on Country {
@@ -126,131 +126,148 @@ export const NEW_COUNTRY = gql`
 `;
 
 export const FARMS = gql`
-query GetFarms {
-  getFarms {
-    id
-    name
-    region {
+  query GetFarms {
+    getFarms {
+      id
       name
-      country {
+      region {
         name
+        country {
+          name
+        }
       }
     }
   }
-}
-`
+`;
 
 export const ACCOUNT_COUNTRIES = gql`
-query GetAccountCountries($accountId: ID) {
-  accountCountries(accountId: $accountId) {
-		country {
-      code
-      name
+  query GetAccountCountries($accountId: ID) {
+    accountCountries(accountId: $accountId) {
+      country {
+        code
+        name
+      }
     }
   }
-}
-`
+`;
 
 export const ACCOUNT_USERS = gql`
-query AccountUsers {
-  accountUsers {
-    id
-    createdAt
-    email
+  query AccountUsers {
+    accountUsers {
+      id
+      createdAt
+      email
+    }
   }
-}
-`
+`;
 
 export const ADD_USER = gql`
-mutation AddUser($email: String!, $password: String!) {
-  addUser(email: $email, password: $password) {
-    email
-    createdAt
-    id
+  mutation AddUser($email: String!, $password: String!) {
+    addUser(email: $email, password: $password) {
+      email
+      createdAt
+      id
+    }
   }
-}
-`
+`;
 
 export const ADD_FARM = gql`
-mutation AddFarm($name: String!, $regionId: ID!) {
-  addFarm(name: $name, regionId: $regionId) {
-    id
-    name
-    region {
+  mutation AddFarm($name: String!, $regionId: ID!) {
+    addFarm(name: $name, regionId: $regionId) {
+      id
       name
-      country {
+      region {
         name
+        country {
+          name
+        }
       }
     }
   }
-}
-`
+`;
 
 export const USER_FARMS = gql`
-query GetUserFarmsAccess($accountId: ID!) {
-  userFarms(accountId: $accountId) {
-		farm {
-      id
-      name
-      region {
+  query GetUserFarmsAccess($accountId: ID!) {
+    userFarms(accountId: $accountId) {
+      farm {
+        id
         name
-        country {
+        region {
           name
+          country {
+            name
+          }
         }
       }
     }
   }
-}
-`
+`;
 
 export const SET_FARM_ACCESS = gql`
-mutation SetFarmAccess($accountId: ID!, $farmId: ID!) {
-  setFarmAccess(accountId: $accountId, farmId: $farmId) {
-    farm {
-      id
-      name
-      region {
+  mutation SetFarmAccess($accountId: ID!, $farmId: ID!) {
+    setFarmAccess(accountId: $accountId, farmId: $farmId) {
+      farm {
+        id
         name
-        country {
+        region {
           name
+          country {
+            name
+          }
         }
       }
     }
   }
-}
-`
+`;
 
 export const FARM_FIELDS = gql`
-query GetFarmFields($farmId: ID!) {
-  getFarmFields(farmId: $farmId) {
-    id
-    farmId
-    soilType
+  query GetFarmFields($farmId: ID!) {
+    getFarmFields(farmId: $farmId) {
+      id
+      farmId
+      soilType
+    }
   }
-}
-`
+`;
 
 export const EMPLOYEES = gql`
-query GetEmployees {
-  getEmployees {
-    id
-    address
-    name
-    number
-    salary
-    farmId
+  query GetEmployees {
+    getEmployees {
+      id
+      address
+      name
+      number
+      salary
+      farm {
+        name
+        region {
+          name
+          country {
+            name
+          }
+        }
+      }
+    }
   }
-}
-`
+`;
 
 export const FARM_EMPLOYEES = gql`
-query GetFarmEmployees($farmId: ID!) {
-  getFarmEmployees(farmId: $farmId) {
-    id
-    address
-    name
-    number
-    salary
+  query GetFarmEmployees($farmId: ID!) {
+    getFarmEmployees(farmId: $farmId) {
+      id
+      address
+      name
+      number
+      salary
+      farm {
+        name
+        region {
+          name
+          country {
+            name
+          }
+        }
+      }
+    }
   }
-}
-`
+`;
