@@ -271,3 +271,38 @@ export const FARM_EMPLOYEES = gql`
     }
   }
 `;
+
+export const FIELD_CROPS = gql`
+query GetFieldCrops($fieldId: ID) {
+  getFieldCrops(fieldId: $fieldId) {
+    id
+    growth
+    crop {
+      name
+    }
+  }
+}
+`
+
+export const FARM_MACHINES = gql`
+query GetFarmMachines($farmId: ID) {
+  getFarmMachines(farmId: $farmId) {
+    id
+    quantity
+    machine {
+      id
+      model
+    }
+  }
+}
+`
+
+export const MACHINE = gql`
+query MachineDetails($id: ID!) {
+  getMachine(id: $id) {
+    engine
+    model
+    type
+  }
+}
+`

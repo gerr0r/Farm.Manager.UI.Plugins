@@ -21,18 +21,18 @@ const FarmFields = ({ farmId }) => {
       <tbody>
         {data.getFarmFields.map((field, index) => (
           <tr key={field.id}>
+            <td>{index + 1}</td>
+            <td>{field.soilType}</td>
             <td>
               <Link
                 to={{
-                  pathname: `/fields/${field.id}`,
-                  //   state: { farm },
+                  pathname: `/fields/${field.id}/crops`,
+                  state: { field },
                 }}
               >
-                {index + 1}
+                Show map
               </Link>
             </td>
-            <td>{field.soilType}</td>
-            <td>Crops</td>
           </tr>
         ))}
       </tbody>

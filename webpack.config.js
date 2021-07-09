@@ -39,6 +39,8 @@ module.exports = {
         "./Account": "./src/components/Account",
         "./Farms": "./src/components/Farms",
         "./Farm": "./src/components/Farm",
+        "./FieldCrops": "./src/components/FieldCrops",
+        "./MachineDetails": "./src/components/MachineDetails",
         "./Users": "./src/components/Users",
         "./User": "./src/components/User",
         "./Employees": "./src/components/Employees",
