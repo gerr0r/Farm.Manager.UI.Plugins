@@ -187,7 +187,7 @@ export const ADD_FARM = gql`
 `;
 
 export const USER_FARMS = gql`
-  query GetUserFarmsAccess($accountId: ID!) {
+  query GetUserFarmsAccess($accountId: ID) {
     userFarms(accountId: $accountId) {
       farm {
         id

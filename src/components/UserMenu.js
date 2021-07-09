@@ -1,23 +1,24 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-
-const farms = [
-    {id: 1, name: 'farm1'},
-    {id: 2, name: 'farm2'},
-    {id: 3, name: 'farm3'},
-    {id: 4, name: 'farm4'},
-    {id: 5, name: 'farm5'},
-]
+import { useQuery } from "@apollo/client";
+import React from "react";
+import { Link } from "react-router-dom";
+import { USER_FARMS } from "../gql";
 
 const UserMenu = () => {
-    if (!farms) return null
-    return (
-        <div className="menu">
-            {farms.map(farm =>
-                <Link key={farm.id} to={`/farms/${farm.id}`}>{farm.name}</Link>
-            )}
-        </div>
-    )
-}
+  const { loading, data } = useQuery(USER_FARMS);
 
-export default UserMenu
+  if (loading) return null;
+  return (
+    <div className="menu">
+      {data.userFarms.map(({ farm }) => (
+        <Link
+          key={farm.id}
+          to={{ pathname: `/farms/${farm.id}`, state: { farm } }}
+        >
+          {farm.name}
+        </Link>
+      ))}
+    </div>
+  );
+};
+
+export default UserMenu;
