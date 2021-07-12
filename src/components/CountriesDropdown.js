@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { COUNTRIES, ADD_ASSIGNMENT } from "../gql";
 
 const CountriesDropdown = ({ accountId }) => {
+  const [errors, setErrors] = useState(null)
   const [selectedCountry, setSelectedCountry] = useState("");
   const { loading, data } = useQuery(COUNTRIES);
 
@@ -22,6 +23,12 @@ const CountriesDropdown = ({ accountId }) => {
         },
       });
     },
+    onError(error) {
+      setErrors(error.message)
+    },
+    onCompleted() {
+      setErrors(null)
+    }
   });
 
   if (loading) return null;
@@ -38,6 +45,7 @@ const CountriesDropdown = ({ accountId }) => {
           </option>
         ))}
       </select>
+      {errors && <small>{errors}</small> }
       <button disabled={!Boolean(selectedCountry)} onClick={assignCountry}>
         Assign
       </button>
